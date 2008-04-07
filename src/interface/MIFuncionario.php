@@ -14,7 +14,6 @@
 */
 
 // Verifica o tipo de operação  a ser realizada
-$modulo = $_POST["pModulo"];
 $op = $_POST["pTipoOperacao"];
 $bEncerra = false;
 $sMsgRetorno;
