@@ -1,0 +1,252 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.0
+-- http://www.phpmyadmin.net
+--
+-- Servidor: localhost
+-- Tempo de Geração: Mai 04, 2008 as 02:05 PM
+-- Versão do Servidor: 5.0.45
+-- Versão do PHP: 5.2.4
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Banco de Dados: `bd`
+--
+CREATE DATABASE `bd` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `bd`;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `acessos`
+--
+
+CREATE TABLE `acessos` (
+  `Funcionario_cpf` int(10) unsigned NOT NULL,
+  `dataAcesso` date NOT NULL,
+  `hora` time NOT NULL,
+  PRIMARY KEY  (`Funcionario_cpf`,`dataAcesso`,`hora`),
+  KEY `Acessos_FKIndex1` (`Funcionario_cpf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `acessos`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `codigo` int(10) unsigned NOT NULL auto_increment,
+  `nome` varchar(30) default NULL,
+  `natureza` char(1) default NULL,
+  PRIMARY KEY  (`codigo`),
+  KEY `Categoria_NomeNat` (`nome`,`natureza`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Extraindo dados da tabela `categoria`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `configuracao`
+--
+
+CREATE TABLE `configuracao` (
+  `identificacao` int(10) unsigned NOT NULL auto_increment,
+  `descricao` varchar(45) default NULL,
+  PRIMARY KEY  (`identificacao`),
+  KEY `Configuracao_Descricao` (`descricao`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Extraindo dados da tabela `configuracao`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `departamento`
+--
+
+CREATE TABLE `departamento` (
+  `codigo` int(10) unsigned NOT NULL auto_increment,
+  `nome` varchar(30) default NULL,
+  `sigla` varchar(3) default NULL,
+  `departamentoSuperior` int(10) unsigned default NULL,
+  `saldoConta` float default NULL,
+  PRIMARY KEY  (`codigo`),
+  KEY `Departamento_Nome` (`nome`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Extraindo dados da tabela `departamento`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `departamentofuncionariofuncao`
+--
+
+CREATE TABLE `departamentofuncionariofuncao` (
+  `Departamento_codigo` int(10) unsigned NOT NULL,
+  `Funcao_codigo` int(10) unsigned NOT NULL,
+  `Funcionario_cpf` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`Departamento_codigo`,`Funcao_codigo`,`Funcionario_cpf`),
+  KEY `Departamento_Funcionario_Funcao_FKIndex1` (`Departamento_codigo`),
+  KEY `Departamento_Funcionario_Funcao_FKIndex2` (`Funcao_codigo`),
+  KEY `Departamento_Funcionario_Funcao_FKIndex3` (`Funcionario_cpf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `departamentofuncionariofuncao`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `funcao`
+--
+
+CREATE TABLE `funcao` (
+  `codigo` int(10) unsigned NOT NULL auto_increment,
+  `descricao` varchar(30) default NULL,
+  PRIMARY KEY  (`codigo`),
+  KEY `Funcao_Descricao` (`descricao`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Extraindo dados da tabela `funcao`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `funcionario`
+--
+
+CREATE TABLE `funcionario` (
+  `cpf` int(11) unsigned NOT NULL,
+  `nome` varchar(45) default NULL,
+  `tipoEndereco` char(1) default NULL,
+  `logradouro` varchar(40) default NULL,
+  `numero` int(10) unsigned default NULL,
+  `complemento` varchar(20) default NULL,
+  `bairro` varchar(20) default NULL,
+  `cidade` varchar(25) default NULL,
+  `estado` varchar(2) default NULL,
+  `cep` int(10) unsigned default NULL,
+  `apelido` varchar(15) default NULL,
+  `senha` int(11) default NULL,
+  `operador` char(1) default NULL,
+  PRIMARY KEY  (`cpf`),
+  KEY `Funcionario_Nome` (`nome`),
+  KEY `Funcionario_Apelido` (`apelido`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `funcionario`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `funcionarioconfiguracao`
+--
+
+CREATE TABLE `funcionarioconfiguracao` (
+  `Funcionario_cpf` int(10) unsigned NOT NULL,
+  `Configuracao_identificacao` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`Funcionario_cpf`,`Configuracao_identificacao`),
+  KEY `FuncionarioConfiguracao_FKIndex1` (`Funcionario_cpf`),
+  KEY `FuncionarioConfiguracao_FKIndex2` (`Configuracao_identificacao`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `funcionarioconfiguracao`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `memorando`
+--
+
+CREATE TABLE `memorando` (
+  `numero` int(10) unsigned NOT NULL auto_increment,
+  `descricao` varchar(255) default NULL,
+  `imagem` varchar(56) default NULL,
+  PRIMARY KEY  (`numero`),
+  KEY `Memorando_Descricao` (`descricao`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Extraindo dados da tabela `memorando`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `movimentacao`
+--
+
+CREATE TABLE `movimentacao` (
+  `numero` int(10) unsigned NOT NULL auto_increment,
+  `Funcionario_cpf_Beneficiado` int(10) unsigned NOT NULL,
+  `Funcionario_cpf_Confirmacao` int(10) unsigned NOT NULL,
+  `Funcionario_cpf_Lancamento` int(10) unsigned NOT NULL,
+  `Departamento_codigo` int(10) unsigned NOT NULL,
+  `Memorando_numero` int(10) unsigned NOT NULL,
+  `Categoria_codigo` int(10) unsigned NOT NULL,
+  `dataMovimento` date default NULL,
+  `descricao` varchar(45) default NULL,
+  `valor` float default NULL,
+  PRIMARY KEY  (`numero`),
+  KEY `Movimentacao_Data` (`dataMovimento`),
+  KEY `Movimentacao_FKIndex1` (`Categoria_codigo`),
+  KEY `Movimentacao_FKIndex2` (`Memorando_numero`),
+  KEY `Movimentacao_FKIndex4` (`Departamento_codigo`),
+  KEY `Movimentacao_FKIndex5` (`Funcionario_cpf_Lancamento`),
+  KEY `Movimentacao_FKIndex6` (`Funcionario_cpf_Confirmacao`),
+  KEY `Movimentacao_FKIndex7` (`Funcionario_cpf_Beneficiado`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Extraindo dados da tabela `movimentacao`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `telefonesfuncionario`
+--
+
+CREATE TABLE `telefonesfuncionario` (
+  `Funcionario_cpf` int(10) unsigned NOT NULL,
+  `tipoTelefone` char(1) NOT NULL,
+  `ddd` int(10) unsigned default NULL,
+  `numero` int(10) unsigned default NULL,
+  PRIMARY KEY  (`Funcionario_cpf`,`tipoTelefone`),
+  KEY `TelefonesFuncionario_FKIndex1` (`Funcionario_cpf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `telefonesfuncionario`
+--
+
