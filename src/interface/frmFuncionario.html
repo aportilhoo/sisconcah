@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <td>     
-      <form name="form1" method="post" action="validaFuncionario.php">
+      <form name="form1" method="post" action="MIFuncionario.php">
         <input type="hidden" name="pTipoOperacao" value="001">
         <table border="0" cellspacing="0" width="100%">
           <tbody>
@@ -66,7 +66,7 @@
             </tr>
             <tr>
               <td style="text-align: right;" height="16" width="15%"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"><b><i><font size="2"> Nº:</font></i></b></font>&nbsp;</td>
-              <td height="16" width="85%"><input name="txNumero" maxlength="0" size="8" value=""></td>
+              <td height="16" width="85%"><input name="txNumero" maxlength="8" size="8" value=""></td>
             </tr>
             <tr>
               <td style="text-align: right;"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"><b><i><font size="2"> Complemento:</font></i></b></font></td>
@@ -83,28 +83,21 @@
             <tr>
               <td style="text-align: right;"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"><b><i><font size="2"> Estado:</font></i></b></font></td>
               <td>             
-              <select name="Estado">
-              <optgroup label="AC"></optgroup> <optgroup label="AL"></optgroup>
-			  <optgroup label="AM"></optgroup> <optgroup label="AP"></optgroup>
-			  <optgroup label="BA"></optgroup> <optgroup label="CE"></optgroup>
-			  <optgroup label="DF"></optgroup> <optgroup label="ES"></optgroup>
-			  <optgroup label="GO"></optgroup> <optgroup label="MA"></optgroup>
-			  <optgroup label="MG"></optgroup> <optgroup label="MG"></optgroup>
-			  <optgroup label="MT"></optgroup> <optgroup label="PA"></optgroup>
-			  <optgroup label="PB"></optgroup> <optgroup label="PE"></optgroup> 
-			  <optgroup label="PI"></optgroup> <optgroup label="PR"></optgroup>
-			  <optgroup label="RJ"></optgroup> <optgroup label="RN"></optgroup>
-			  <optgroup label="RO"></optgroup> <optgroup label="RR"></optgroup>
-			  <optgroup label="RS"></optgroup> <optgroup label="SC"></optgroup>
-			  <optgroup label="SE"></optgroup> <optgroup label="SP"></optgroup>
-			  <optgroup label="TO"></optgroup>
+              <select name="txEstado">
+              <OPTION>AC <OPTION>AL <OPTION>AM <OPTION>AP
+			  <OPTION>BA <OPTION>CE <OPTION>DF <OPTION>ES
+			  <OPTION>GO <OPTION>MA <OPTION>MG <OPTION>MT 
+			  <OPTION>PA <OPTION>PB <OPTION>PE <OPTION>PI
+			  <OPTION>PR <OPTION>RJ <OPTION>RN <OPTION>RO
+			  <OPTION>RR <OPTION>RS <OPTION>SC <OPTION>SE
+			  <OPTION>SP <OPTION>TO 
               </select>
               <br>
               </td>
             </tr>
             <tr>
               <td style="text-align: right;"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"><b><i><font size="2"> CEP:</font></i></b></font></td>
-              <td><input name="txCep" maxlength="8" size="8" value=""></td>
+              <td><input name="txCep" maxlength="8" size="8" value="12345678"></td>
             </tr>
             <tr>
               <td style="text-align: right;"><font face="Verdana, Arial, Helvetica, sans-serif" size="2"><b><i><font size="2"> Apelido:</font></i></b></font></td>
